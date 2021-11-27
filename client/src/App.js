@@ -39,10 +39,15 @@ const App = () => {
     if (persons.find((person) => person.name === newPerson.name)) {
       updatePerson(newPerson);
     } else {
-      personService.create(newPerson).then((response) => {
-        updateMessage(`Added ${newPerson.name}`, 'success');
-        setPersons(persons.concat(response.data));
-      });
+      personService
+        .create(newPerson)
+        .then((response) => {
+          updateMessage(`Added ${newPerson.name}`, 'success');
+          setPersons(persons.concat(response.data));
+        })
+        .catch((error) => {
+          updateMessage(error.response.data.error, 'error');
+        });
     }
     setNewName('');
     setNewNumber('');
@@ -63,11 +68,8 @@ const App = () => {
             persons.map((p) => (p.id !== person.id ? p : response.data))
           );
         })
-        .catch(() => {
-          updateMessage(
-            `Information of ${newPerson.name} has already been removed from server`,
-            'error'
-          );
+        .catch((error) => {
+          updateMessage(error.response.data.error, 'error');
         });
     }
   };
@@ -82,11 +84,8 @@ const App = () => {
             persons.filter((person) => person.id !== personToRemove.id)
           );
         })
-        .catch(() => {
-          updateMessage(
-            `${personToRemove.name} was already removed from server`,
-            'error'
-          );
+        .catch((error) => {
+          updateMessage(error.response.data.error, 'error');
         });
     }
   };
