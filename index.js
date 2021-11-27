@@ -35,7 +35,11 @@ let phonebook = [
   },
 ];
 
-app.get('/info/', (request, response) => {
+app.get('/', (request, response) => {
+  response.send(`<p>Hello Heroku</p>`);
+});
+
+app.get('/info', (request, response) => {
   response.send(`<p>Phonebook has infor for ${phonebook.length} people</p>
                  <p>${new Date()} </p>`);
 });
