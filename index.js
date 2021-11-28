@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
-morgan.token('body', function (req, res) {
+morgan.token('body', (req) => {
   return JSON.stringify(req.body);
 });
 
@@ -53,7 +53,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then((removedItem) => {
+    .then(() => {
       response.status(204).end();
     })
     .catch((error) => next(error));
