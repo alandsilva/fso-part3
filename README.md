@@ -7,8 +7,7 @@ To run code create .env file that includes values:
 - MONGODB_URI -> from mongodb.com
 - PORT (I used 3003).
 
-In this folder are both the backend and frontend of the app.
-Notes:
+In this folder are both the backend and frontend of the app:
 
 - Frontend code is at 'client' folder.
 - eslint ignores both 'build' and 'client' folders.
